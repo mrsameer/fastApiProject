@@ -4,7 +4,7 @@ from shapely.geometry import mapping
 from sqlalchemy.orm import Session
 
 from database import get_db
-from services.grid_service import get_grid_by_coordinates
+from services.grid_service import get_grid_by_coordinates, get_intersecting_grid_external_ids
 
 router = APIRouter()
 
@@ -21,3 +21,7 @@ async def get_grid(latitude: float, longitude: float, db: Session = Depends(get_
     return grid
 
 
+@router.post("/grid/intersecting")
+async def get_intersecting_grids(request: dict, db: Session = Depends(get_db)):
+    external_ids = get_intersecting_grid_external_ids(db, request["polygon"])
+    return external_ids
