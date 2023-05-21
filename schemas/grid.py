@@ -1,9 +1,11 @@
+from geoalchemy2.elements import WKBElement
 from pydantic import BaseModel
 
 
 class GridBase(BaseModel):
     grid_latitude: float
     grid_longitude: float
+    geom: WKBElement
 
 
 class GridCreate(GridBase):
@@ -17,6 +19,3 @@ class Grid(GridBase):
     insert_ts: float
     update_ts: float
     deleted: float
-
-    class Config:
-        orm_mode = True
