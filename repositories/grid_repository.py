@@ -10,6 +10,6 @@ def fetch_grid_by_coordinates(db: Session, latitude: float, longitude: float):
     return result
 
 
-def get_intersecting_grids(db: Session, polygon: str):
+def get_intersecting_grids(db: Session, polygon: str, grid_type: str):
     wkt_element = WKTElement(polygon, srid=4326)
-    return db.query(Grid).filter(func.ST_Intersects(Grid.geom, wkt_element)).all()
+    return db.query(Grid).filter(func.ST_Intersects(Grid.geom, wkt_element), Grid.grid_type == grid_type).all()

@@ -23,5 +23,5 @@ async def get_grid(latitude: float, longitude: float, db: Session = Depends(get_
 
 @router.post("/grid/intersecting")
 async def get_intersecting_grids(request: dict, db: Session = Depends(get_db)):
-    external_ids = get_intersecting_grid_external_ids(db, request["polygon"])
+    external_ids = get_intersecting_grid_external_ids(db, request["polygon"], request["grid_type"])
     return external_ids

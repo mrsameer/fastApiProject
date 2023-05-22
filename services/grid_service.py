@@ -8,10 +8,10 @@ def get_grid_by_coordinates(db: Session, latitude: float, longitude: float):
     return result
 
 
-def get_intersecting_grid_external_ids(db: Session, polygon):
+def get_intersecting_grid_external_ids(db: Session, polygon, grid_type):
 
     # Query the grids that intersect with the given polygon
-    intersecting_grids = get_intersecting_grids(db, polygon)
+    intersecting_grids = get_intersecting_grids(db, polygon, grid_type)
 
     # Extract the external IDs of the intersecting grids
     external_ids = [grid.external_id for grid in intersecting_grids]
